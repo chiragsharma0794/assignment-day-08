@@ -48,9 +48,9 @@ def main():
         print("BLOCKED: exceeds electronics category limit")
         return
 
-    if hour < 6 or hour > 23:
-        print("FLAGGED: unusual transaction time")
-        return
+    if hour < 6 or hour >= 23:
+    print("FLAGGED: unusual transaction time")
+    	return
 
     print("APPROVED")
 
