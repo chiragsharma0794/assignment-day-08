@@ -1,3 +1,6 @@
+﻿# part_e_transaction_validator.py
+# Smart Transaction Validator
+
 def main():
     try:
         amount = float(input("Transaction amount (Rs): ").strip())
@@ -6,7 +9,7 @@ def main():
         daily_spent = float(input("Amount already spent today (Rs): ").strip())
         vip = input("VIP customer (yes/no): ").strip().lower()
     except ValueError:
-        print("BLOCKED: invalid numeric input")
+        print("BLOCKED: invalid input type")
         return
 
     if amount <= 0:
@@ -32,6 +35,7 @@ def main():
     food_limit = 5000 * multiplier
     electronics_limit = 30000 * multiplier
 
+    # BLOCK rules override everything
     if amount > single_txn_limit:
         print("BLOCKED: exceeds single transaction limit")
         return
@@ -40,6 +44,7 @@ def main():
         print("BLOCKED: exceeds daily spending limit")
         return
 
+    # Category limits (BLOCK)
     if category == "food" and amount >= food_limit:
         print("BLOCKED: exceeds food category limit")
         return
@@ -48,9 +53,10 @@ def main():
         print("BLOCKED: exceeds electronics category limit")
         return
 
+    # FLAG rules (before 6 AM or at/after 11 PM)
     if hour < 6 or hour >= 23:
-    print("FLAGGED: unusual transaction time")
-    	return
+        print("FLAGGED: unusual transaction time")
+        return
 
     print("APPROVED")
 
